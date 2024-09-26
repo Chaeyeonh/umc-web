@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e0e7ef; /* 배경색 설정 */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 화면 전체를 차지하도록 */
+  flex-direction: column;
+}
+
+/* 제목 스타일링 */
+h1 {
+  font-size: 36px;
+  color: #333; /* 제목 색상 */
+  padding-bottom: 80px;
+  border-bottom: 2px solid #cad2dd;
+  margin:0;
+}
+
+input::placeholder{
+  color:grey;
+  font-style:italic;
+}
+/* 입력 필드 스타일링 */
+#taskInput {
+  width: 600px; /* 너비 */
+  padding: 10px; /* 내부 여백 */
+  font-size: 16px; /* 글자 크기 */
+  border: 2px solid #333; /* 테두리 */
+  margin-bottom:0;
+
+}
+
+.todo-container{
+  text-align: center;
+}
+   
+h2{
+  font-size: 15px;
+  color: #333;
+  font-weight: 500px; 
+  display: inline-block; /*제목의 텍스트 길이에 맞춰 밑줄의 길이를 제한*/
+  border-bottom: 3px solid #cad2dd;
+  margin-bottom: 40px;
+  
+}
+
+div.list{
+  display: flex;
+  justify-content: space-around;
+  gap: 250px;
+  
+}
+
+.completeButton{
+  margin-right : 0px;
+  background-color: #cad2dd;
+  padding: 3px;
+  border: none;
+
+}
+
+ul {
+  list-style-type: none; /* 불릿 포인트 제거 */
+  padding-left: 0; /* 왼쪽 여백 제거 */
+}
+
+.todoItem{
+  font-weight:bold;
+  border-bottom:3px solid #cad2dd;
+  width: 160px;
+  align-items: center; /* 세로 정렬 */
+  padding: 10px;
+  display: flex; /* Flexbox 사용 */
+  justify-content: space-between; /* 왼쪽은 텍스트, 오른쪽은 버튼 */
+}
