@@ -1,42 +1,40 @@
-
-import {useEffect, useState} from 'react';
-import {axiosInstance} from "../apis/axios-instance.js";
 import MoviesDesign from "../components/moviesDesign.jsx";
-import styled from 'styled-components';
 import Card from '../components/Card.jsx';
+import { useGetMovies } from "../hooks/queries/useGetMovies.js";
+import { useQuery } from "@tanstack/react-query";
+
 const NowPlaying = () => {
+  const { data: movies, isLoading, isError } = useQuery({
+    queryKey: ['movies', 'now_playing'],
+    queryFn: () => useGetMovies({ category: 'now_playing', pageParam: 1 }), // pageParam을 명시적으로 전달
+    cacheTime: 10000,
+    staleTime: 10000,
 
-  const[movies,setMovies] = useState([])
+  });
 
-  //컴포넌트가 처음 마운트될 때 한 번만 실행되어 The Movie Database API에서 영화 데이터를 가져오도록 설정
-  useEffect(() => {
-    //getMovies: 영화 데이터 가져오는 비동기 함수
-    //axios.get(): themoviedb api에 GET 요청 보내고 인기 영화 데이터 받아오기
-    const getMovies = async () => {
-        const movies = await axiosInstance.get(`/movie/now_playing?language=ko-KR&page=1`)
-        setMovies(movies);//axios로부터 받아온 영화 데이터를 movies 상태로 업데이트
-    }
-    getMovies() // 만든 함수를 호출해 데이터 가져옴
-}, []); // useEffect가 한 번만 실행되도록 두 번째 인자 빈배열
+  if (isLoading) {
+    return (
+      <div>
+        <h1 style={{ color: 'white' }}>로딩 중 입니다...</h1>
+      </div>
+    );
+  }
 
+  if (isError) {
+    return (
+      <div>
+        <h1 style={{ color: 'white' }}>에러중</h1>
+      </div>
+    );
+  }
 
   return (
     <MoviesDesign>
-      {movies?.data?.results.map((movie) => (
-        <Card key = {movie.id} movie={movie}/>
+      {movies?.results?.map((movie) => (
+        <Card key={movie.id} movie={movie} />
       ))}
     </MoviesDesign>
-  );  
+  );
 };
 
 export default NowPlaying;
-
-const PosterItem = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const MovieInfo = styled.div`
-  display: block;
-
-`;

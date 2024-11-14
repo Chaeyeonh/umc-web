@@ -1,6 +1,7 @@
 import React from 'react';
 import RootLayout from "./layout/root-layout.jsx";
 import HomePage from "./pages/home.jsx";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 //import NotFound from "./pages/not-found.jsx";
 import LogInPage from './pages/login.jsx';
 import SignUpPage from './pages/signup.jsx';
@@ -13,7 +14,7 @@ import Upcoming from './pages/upcoming.jsx';
 import MovieDetail from './pages/MovieDetail.jsx';
 
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
       path: '/',
@@ -74,7 +75,12 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  return <RouterProvider router={router}/>
+  return(
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router}/>
+    </QueryClientProvider>
+  );
+
 }
 export default App;
 
