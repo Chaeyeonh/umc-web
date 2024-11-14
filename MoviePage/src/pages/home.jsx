@@ -1,12 +1,10 @@
 
 import {useEffect, useState} from 'react';
-
-import ImageHover from '../ImageHover'; // ImageHover 컴포넌트 임포트
 import MoviesDesign from "../components/moviesDesign.jsx";
 import styled from 'styled-components';
 import { axiosInstance } from '../apis/axios-instance.js';
 import useCustomFetch from '../hooks/useCustomFetch.js';
-import { Link } from 'react-router-dom';
+import Card from '../components/Card.jsx';
 
 const HomePage = () => {
 
@@ -24,22 +22,10 @@ const HomePage = () => {
   return (
     <MoviesDesign>
       {movies?.data?.results.map((movie) => (
-        <Link to={`/movie/${movie.id}`} key={movie.id} style={{ textDecoration: 'none', color: 'inherit' }}>
-          {/* 영화 카드 전체를 Link로 감싸서 클릭 시 상세 페이지로 이동 */}
-          <PosterItem>
-            <MovieInfo>
-              <ImageHover
-                imageUrl={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                altText={movie.title}
-              />
-              <h3>{movie.title}</h3> {/* 영화 제목 출력 */}
-              <p style={{ fontSize: 10 }}>개봉일: {movie.release_date}</p> {/* 영화 개봉일 출력 */}
-            </MovieInfo>
-          </PosterItem>
-        </Link>
+        <Card key = {movie.id} movie={movie}/>
       ))}
     </MoviesDesign>
-  );
+  );  
 };
 
 export default HomePage;

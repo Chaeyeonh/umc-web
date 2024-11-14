@@ -3,9 +3,12 @@ import {useForm} from 'react-hook-form'
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 import styled from 'styled-components';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 const LogInPage = () => {
  
+  const navigate = useNavigate();
   const schema = yup.object().shape({
     email: yup.string().email('올바른 이메일 형식이 아닙니다.').required('이메일을 반드시 입력해주세요.'),
     password: yup.string().min(8, '비밀번호는 8자 이상이어야 합니다.').max(16, '비밀번호는 16자 이하여야 합니다.').required('비밀번호를 반드시 입력해주세요.'),
@@ -16,10 +19,27 @@ const {register, handleSubmit, formState: {errors, isValid}} = useForm({
     mode:"onChange"
 });
 
-const onSubmit = (data) => {
-    console.log('폼 데이터 제출')
-    console.log(data);
-}
+const onSubmit = async (data) => {
+  try {
+    // 로그인 API 요청
+    const response = await axios.post('http://localhost:3000/auth/login', {
+      email: data.email,
+      password: data.password,
+    });
+    
+    // 토큰 저장
+    const { accessToken, refreshToken } = response.data;
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    
+    alert("로그인에 성공했습니다!");
+    navigate('/'); // 메인 페이지로 이동
+  } catch (error) {
+    console.error("로그인 실패:", error);
+    alert("로그인에 실패했습니다. 다시 시도해주세요.");
+  }
+};
+
   return (
     <FormContainer>
  
