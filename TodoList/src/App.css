@@ -1,0 +1,84 @@
+/* General Styles */
+.todolist-container{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100vh;
+}
+.container{
+  
+  background-color: rgb(186, 226, 213);
+  padding: 50px;
+  border-radius: 10px;
+  
+}
+.form-container {
+  margin-bottom: 20px;
+}
+
+
+.title{
+  text-align: center;
+  margin: 50px 0;
+}
+.input-field {
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+}
+
+.add-button,
+.delete-button,
+.edit-button {
+  padding: 5px 10px;
+  margin-left: 5px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-button:hover,
+.delete-button:hover,
+.edit-button:hover
+{
+  background-color: #44a791;
+  color: white;
+  border:none;
+}
+
+.edit-input {
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  gap: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  min-width: 300px;
+}
+
+.todo-id-task {
+  display: flex;
+  gap: 5px;
+  flex:1;
+}
+
+.button-group {
+  display: flex;
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+
+/* 버튼 그룹에 최소 너비 설정 */
+.button-group > button {
+  min-width: 80px; /* 버튼이 최소 이 정도 너비를 가짐 */
+}
